@@ -81,8 +81,6 @@ public class UserController {
             settingsEntity.setCurrency("euro");
             settingsEntity.setUserId(userId);
             settingsEntity.setRadius(0.0);
-            settingsEntity.setViewByDefault("available");
-            settingsEntity.setAskPermissionsBeforeDeletingAJob(true);
             settingsService.save(settingsEntity);
         }else{
             Note note = new Note();
