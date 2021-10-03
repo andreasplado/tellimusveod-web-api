@@ -1,6 +1,5 @@
 package com.tellimusveod.webapi.model;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 public class UserSettings {

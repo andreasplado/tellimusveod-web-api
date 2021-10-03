@@ -1,10 +1,10 @@
 package com.tellimusveod.webapi.entity;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "oder")
+@Table(name = "orders")
 public class OrderEntity {
 
     @Id

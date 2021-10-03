@@ -1,14 +1,14 @@
 package com.tellimusveod.webapi.controller;
 
-import com.tellimusveod.webapi.model.Pay;
-import com.tellimusveod.webapi.model.PurchaseData;
-import com.tellimusveod.webapi.service.SettingsService;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
 import com.stripe.model.PaymentIntent;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.tellimusveod.webapi.model.Pay;
+import com.tellimusveod.webapi.model.PurchaseData;
+import com.tellimusveod.webapi.service.SettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

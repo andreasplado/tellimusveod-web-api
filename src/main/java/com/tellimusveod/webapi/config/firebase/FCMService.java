@@ -1,7 +1,7 @@
 package com.tellimusveod.webapi.config.firebase;
 
-import com.tellimusveod.webapi.model.PushNotificationRequest;
 import com.google.firebase.messaging.*;
+import com.tellimusveod.webapi.model.PushNotificationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
