@@ -1,0 +1,5 @@
+ALTER TABLE users
+DROP COLUMN is_biometric;
+
+ALTER TABLE settings
+ADD COLUMN is_biometric BOOLEAN NOT NULL DEFAULT FALSE;
