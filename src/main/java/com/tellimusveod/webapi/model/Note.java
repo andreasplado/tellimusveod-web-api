@@ -1,4 +1,4 @@
-package com.tellimusveod.webapi.data;
+package com.tellimusveod.webapi.model;
 
 public class Note {
     private String message;

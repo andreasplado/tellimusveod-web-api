@@ -1,16 +1,16 @@
-package com.tellimusveod.webapi.dao.entity;
+package com.tellimusveod.webapi.entity;
 
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "jobs")
-public class JobEntity {
+@Table(name = "oder")
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @TableGenerator(
-            name="job",
+            name="id",
             table="GENERATOR_TABLE",
             pkColumnName = "key",
             valueColumnName = "next",
@@ -22,27 +22,26 @@ public class JobEntity {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "offerer_id")
+    private Integer offererId;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "category_id")
-    private Integer categoryId;
+    @Column(name = "category")
+    private String category;
 
-    @Column(name = "salary")
-    private Double salary;
-
-    @Column(name = "latitude")
-    private Double latitude;
+    @Column(name = "cost")
+    private Double cost;
 
     @Column(name = "longitude")
     private Double longitude;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
     @Column(name = "created_at")
     private Date createdAt;
-
 
     @Column(name = "is_done")
     private boolean isDone;
@@ -51,17 +50,17 @@ public class JobEntity {
     private Date updatedAt;
 
 
-    @Column(name = "applyer_id")
-    private Integer applyerId;
+    @Column(name = "orderer_id")
+    private Integer ordererId;
 
-    public JobEntity() {
+    public OrderEntity() {
 
     }
 
-    public JobEntity(String title, String description, Double salary, Double longitude, Double latitude) {
+    public OrderEntity(String title, String description, Double cost, Double longitude, Double latitude) {
         this.setTitle(title);
         this.setDescription(description);
-        this.setSalary(salary);
+        this.setCost(cost);
         this.setLongitude(longitude);
         this.setLatitude(latitude);
         this.setCreatedAt(new Date());
@@ -139,36 +138,29 @@ public class JobEntity {
         this.description = description;
     }
 
-    public Double getSalary() {
-        return salary;
+    public Double getCost() {
+        return cost;
     }
 
-    private void setSalary(Double salary) {
-        this.salary = salary;
+    private void setCost(Double cost) {
+        this.cost = cost;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+
+    public Integer getOrdererId() {
+        return ordererId;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setOrdererId(Integer ordererId) {
+        this.ordererId = ordererId;
     }
 
-    public Integer getApplyerId() {
-        return applyerId;
+    public Integer getOffererId() {
+        return offererId;
     }
 
-    public void setApplyerId(Integer applyerId) {
-        this.applyerId = applyerId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setOffererId(Integer offererId) {
+        this.offererId = offererId;
     }
 
     public boolean isDone() {
@@ -177,6 +169,14 @@ public class JobEntity {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
 

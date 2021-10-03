@@ -1,6 +1,6 @@
 package com.tellimusveod.webapi.respository;
 
-import com.tellimusveod.webapi.dao.entity.SettingsEntity;
+import com.tellimusveod.webapi.entity.SettingsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

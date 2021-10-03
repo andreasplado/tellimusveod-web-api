@@ -1,7 +1,7 @@
 package com.tellimusveod.webapi.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tellimusveod.webapi.dao.entity.UserEntity;
+import com.tellimusveod.webapi.entity.UserEntity;
 import com.tellimusveod.webapi.service.NotificationService;
 import com.tellimusveod.webapi.service.SettingsService;
 import com.tellimusveod.webapi.service.UserService;

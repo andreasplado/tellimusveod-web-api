@@ -1,13 +1,10 @@
 package com.tellimusveod.webapi.controller;
 
-import com.tellimusveod.webapi.dao.entity.JobCategoryEntity;
-import com.tellimusveod.webapi.dao.entity.JobEntity;
-import com.tellimusveod.webapi.dto.JobApplicationDTO;
+import com.tellimusveod.webapi.entity.OrderEntity;
 import com.tellimusveod.webapi.model.MainData;
 import com.tellimusveod.webapi.model.ResponseModel;
-import com.tellimusveod.webapi.service.JobApplicationService;
 import com.tellimusveod.webapi.service.JobCategoryService;
-import com.tellimusveod.webapi.service.JobService;
+import com.tellimusveod.webapi.service.OrderService;
 import com.tellimusveod.webapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/jobs")
-public class JobController {
+@RequestMapping("/order")
+public class OrderController {
 
     private static String KEY_JOBS = "jobs";
     private static String KEY_CATEGORIES = "categories";
@@ -30,7 +27,7 @@ public class JobController {
     private UserService userservice;
 
     @Autowired
-    private JobService jobService;
+    private OrderService jobService;
 
     @Autowired
     private JobApplicationService jobApplicationService;
@@ -40,7 +37,7 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<HashMap<String, Object>> getAll() {
-        List<JobEntity> jobs = jobService.findAll();
+        List<OrderEntity> jobs = jobService.findAll();
         List<JobCategoryEntity> categories = jobCategoryService.findAll();
         HashMap<String, Object> combined = new HashMap<>();
 
@@ -66,13 +63,13 @@ public class JobController {
 
     @RequestMapping(value = "/get-available-jobs", method = RequestMethod.GET)
     public ResponseEntity<?> getUserOffers(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Double distance, @RequestParam Integer userId) {
-        List<JobEntity> jobs = jobService.findAvailableJobsWithUserToken(latitude, longitude, distance, userId);
+        List<OrderEntity> jobs = jobService.findAvailableJobsWithUserToken(latitude, longitude, distance, userId);
         return ResponseEntity.ok(jobs);
     }
 
     @RequestMapping(value = "/getalljobsbylocation", method = RequestMethod.GET)
     public ResponseEntity<?> getAllJobsByLocation(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Double distance) {
-        List<JobEntity> jobs = jobService.findAllNearestJobs(latitude, longitude, distance);
+        List<OrderEntity> jobs = jobService.findAllNearestJobs(latitude, longitude, distance);
 
         return ResponseEntity.ok(jobs);
     }
@@ -80,13 +77,13 @@ public class JobController {
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<?> get(@PathVariable("id") Integer id) {
 
-        Optional<JobEntity> job = jobService.findById(id);
+        Optional<OrderEntity> job = jobService.findById(id);
         return ResponseEntity.ok(job);
     }
 
     @RequestMapping(value = "/getjobsbyaccount", method = RequestMethod.GET)
     public ResponseEntity<?> getAll(@RequestParam Integer userId) {
-        List<JobEntity> jobs = jobService.findAllPostedJobs(userId);
+        List<OrderEntity> jobs = jobService.findAllPostedJobs(userId);
 
 
         return ResponseEntity.ok(jobs);
@@ -94,17 +91,17 @@ public class JobController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> create(@RequestBody JobEntity job) {
+    public ResponseEntity<?> create(@RequestBody OrderEntity job) {
         jobService.save(job);
         return ResponseEntity.ok(job);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody JobEntity jobEntity) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody OrderEntity orderEntity) {
 
         if (jobService.exists(id)) {
-            jobService.update(jobEntity);
-            return ResponseEntity.ok(jobEntity);
+            jobService.update(orderEntity);
+            return ResponseEntity.ok(orderEntity);
         } else {
             ResponseModel responseModel = new ResponseModel();
             responseModel.setMessage("You have no jobs found!");
@@ -113,12 +110,12 @@ public class JobController {
     }
 
     @RequestMapping(value = "registerjob/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> registerjob(@PathVariable("id") Integer id, @RequestBody JobEntity jobEntity) {
+    public ResponseEntity<?> registerjob(@PathVariable("id") Integer id, @RequestBody OrderEntity orderEntity) {
 
         if (jobService.exists(id)) {
-            jobService.update(jobEntity);
+            jobService.update(orderEntity);
 
-            return ResponseEntity.ok(jobEntity);
+            return ResponseEntity.ok(orderEntity);
         } else {
             ResponseModel responseModel = new ResponseModel();
             responseModel.setMessage("You have no jobs found!");
@@ -136,17 +133,17 @@ public class JobController {
 
             return ResponseEntity.ok(responseModel);
         }else {
-            JobEntity jobEntity = jobService.findSingleById(id);
+            OrderEntity orderEntity = jobService.findSingleById(id);
             jobService.delete(id);
 
 
-            return ResponseEntity.ok(jobEntity);
+            return ResponseEntity.ok(orderEntity);
         }
     }
 
     @RequestMapping(value = "/get-my-upcoming-work", method = RequestMethod.GET)
     public ResponseEntity<?> getAppliedJobsByGooogleAccount(@RequestParam Integer userId) {
-        List<JobEntity> jobs = jobService.findUpcomingWork(userId);
+        List<OrderEntity> jobs = jobService.findUpcomingWork(userId);
 
         if (jobs.isEmpty()) {
             ResponseModel responseModel = new ResponseModel();
@@ -158,7 +155,7 @@ public class JobController {
 
     @RequestMapping(value = "/getmydonework", method = RequestMethod.GET)
     public ResponseEntity<?> getMyDoneWork(@RequestParam Integer userId) {
-        List<JobEntity> jobs = jobService.findMyDoneWork(userId);
+        List<OrderEntity> jobs = jobService.findMyDoneWork(userId);
 
         if (jobs.isEmpty()) {
             ResponseModel responseModel = new ResponseModel();
@@ -170,7 +167,7 @@ public class JobController {
 
     @RequestMapping(value = "/get-main-data", method = RequestMethod.GET)
     public ResponseEntity<MainData> getMainData(@RequestParam Integer userId) {
-        List<JobEntity> applyedJobs = jobService.findUpcomingWork(userId);
+        List<OrderEntity> applyedJobs = jobService.findUpcomingWork(userId);
         List<JobApplicationDTO> myCandidates = jobApplicationService.findCandidates(userId);
 
         MainData mainData = new MainData();

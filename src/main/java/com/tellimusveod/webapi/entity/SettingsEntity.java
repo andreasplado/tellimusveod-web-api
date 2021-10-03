@@ -1,4 +1,4 @@
-package com.tellimusveod.webapi.dao.entity;
+package com.tellimusveod.webapi.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,12 +24,6 @@ public class SettingsEntity {
 
     @Column(name = "radius")
     private Double radius;
-
-    @Column(name = "view_by_default")
-    private String viewByDefault;
-
-    @Column(name = "ask_permissions_before_deleting_a_job")
-    private boolean askPermissionsBeforeDeletingAJob;
 
     @Column(name = "show_information_on_startup")
     private boolean showInformationOnStartup;
@@ -115,24 +109,8 @@ public class SettingsEntity {
         return radius;
     }
 
-    public String getViewByDefault() {
-        return viewByDefault;
-    }
-
-    public void setViewByDefault(String viewByDefault) {
-        this.viewByDefault = viewByDefault;
-    }
-
     public void setRadius(Double radius) {
         this.radius = radius;
-    }
-
-    public Boolean getAskPermissionsBeforeDeletingAJob() {
-        return askPermissionsBeforeDeletingAJob;
-    }
-
-    public void setAskPermissionsBeforeDeletingAJob(Boolean askPermissionsBeforeDeletingAJob) {
-        this.askPermissionsBeforeDeletingAJob = askPermissionsBeforeDeletingAJob;
     }
 
     public Boolean getShowInformationOnStartup() {

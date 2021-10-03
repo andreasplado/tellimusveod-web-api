@@ -1,6 +1,6 @@
 package com.tellimusveod.webapi.service;
 
-import com.tellimusveod.webapi.dao.entity.SettingsEntity;
+import com.tellimusveod.webapi.entity.SettingsEntity;
 
 import java.util.List;
 

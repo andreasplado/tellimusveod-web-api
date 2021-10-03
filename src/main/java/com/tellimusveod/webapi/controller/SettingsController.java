@@ -1,8 +1,8 @@
 package com.tellimusveod.webapi.controller;
 
 
-import com.tellimusveod.webapi.dao.entity.SettingsEntity;
-import com.tellimusveod.webapi.dao.entity.UserEntity;
+import com.tellimusveod.webapi.entity.SettingsEntity;
+import com.tellimusveod.webapi.entity.UserEntity;
 import com.tellimusveod.webapi.model.ResponseModel;
 import com.tellimusveod.webapi.model.UserSettings;
 import com.tellimusveod.webapi.service.SettingsService;
@@ -37,10 +37,8 @@ public class SettingsController {
         UserEntity user = userService.findUserById(userId);
         UserSettings userSettings = new UserSettings();
         userSettings.setUserId(settings.getUserId());
-        userSettings.setAskPermissionsBeforeDeletingAJob(settings.getAskPermissionsBeforeDeletingAJob());
         userSettings.setCreatedAt(settings.getCreatedAt());
         userSettings.setCurrency(settings.getCurrency());
-        userSettings.setViewByDefault(settings.getViewByDefault());
         userSettings.setShowInformationOnStartup(settings.getShowInformationOnStartup());
         userSettings.setEmail(user.getEmail());
         userSettings.setFullname(user.getFullname());

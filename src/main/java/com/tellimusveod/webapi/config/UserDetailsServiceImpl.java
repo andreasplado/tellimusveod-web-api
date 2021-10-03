@@ -1,6 +1,6 @@
 package com.tellimusveod.webapi.config;
 
-import com.tellimusveod.webapi.dao.entity.UserEntity;
+import com.tellimusveod.webapi.entity.UserEntity;
 import com.tellimusveod.webapi.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

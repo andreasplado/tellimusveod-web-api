@@ -1,7 +1,5 @@
 package com.tellimusveod.webapi.service;
 
-import com.tellimusveod.webapi.dao.entity.JobCategoryEntity;
-import com.tellimusveod.webapi.respository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

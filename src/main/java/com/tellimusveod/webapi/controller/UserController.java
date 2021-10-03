@@ -1,8 +1,8 @@
 package com.tellimusveod.webapi.controller;
 
-import com.tellimusveod.webapi.dao.entity.SettingsEntity;
-import com.tellimusveod.webapi.dao.entity.UserEntity;
-import com.tellimusveod.webapi.data.Note;
+import com.tellimusveod.webapi.entity.SettingsEntity;
+import com.tellimusveod.webapi.entity.UserEntity;
+import com.tellimusveod.webapi.model.Note;
 import com.tellimusveod.webapi.model.ResponseModel;
 import com.tellimusveod.webapi.service.SettingsService;
 import com.tellimusveod.webapi.service.UserService;

@@ -1,6 +1,6 @@
 package com.tellimusveod.webapi.service;
 
-import com.tellimusveod.webapi.dao.entity.UserEntity;
+import com.tellimusveod.webapi.entity.UserEntity;
 import com.tellimusveod.webapi.respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

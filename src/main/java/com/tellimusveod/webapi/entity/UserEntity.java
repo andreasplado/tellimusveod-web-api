@@ -1,4 +1,4 @@
-package com.tellimusveod.webapi.dao.entity;
+package com.tellimusveod.webapi.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @TableGenerator(
-            name="job",
+            name="id",
             table="GENERATOR_TABLE",
             pkColumnName = "key",
             valueColumnName = "next",

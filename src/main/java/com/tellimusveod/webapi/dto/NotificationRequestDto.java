@@ -1,5 +1,4 @@
 package com.tellimusveod.webapi.dto;
-
 import lombok.Data;
 
 @Data

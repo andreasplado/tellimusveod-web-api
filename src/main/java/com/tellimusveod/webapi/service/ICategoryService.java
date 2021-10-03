@@ -1,7 +1,5 @@
 package com.tellimusveod.webapi.service;
 
-import com.tellimusveod.webapi.dao.entity.JobCategoryEntity;
-
 import java.util.List;
 import java.util.Optional;
 
