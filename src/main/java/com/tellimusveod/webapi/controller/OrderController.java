@@ -26,22 +26,15 @@ public class OrderController {
     private UserService userservice;
 
     @Autowired
-    private OrderService jobService;
-
-    @Autowired
-    private JobApplicationService jobApplicationService;
-
-    @Autowired
-    private JobCategoryService jobCategoryService;
+    private OrderService orderService;
 
     @GetMapping
     public ResponseEntity<HashMap<String, Object>> getAll() {
-        List<OrderEntity> jobs = jobService.findAll();
-        List<JobCategoryEntity> categories = jobCategoryService.findAll();
+        List<OrderEntity> jobs = orderService.findAll();
+
         HashMap<String, Object> combined = new HashMap<>();
 
         combined.put(KEY_JOBS, jobs);
-        combined.put(KEY_CATEGORIES, categories);
 
         if (combined.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -53,53 +46,38 @@ public class OrderController {
 
     @RequestMapping(value = "/start-work", method = RequestMethod.POST)
     public ResponseEntity<ResponseModel> apply(@RequestParam Integer applyerId) {
-        jobService.applyToJob(applyerId);
+        orderService.applyToOrder(applyerId);
         ResponseModel responseModel = new ResponseModel();
         responseModel.setMessage("You started work!");
 
         return ResponseEntity.ok(responseModel);
     }
 
-    @RequestMapping(value = "/get-available-jobs", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-available-orders", method = RequestMethod.GET)
     public ResponseEntity<?> getUserOffers(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Double distance, @RequestParam Integer userId) {
-        List<OrderEntity> jobs = jobService.findAvailableJobsWithUserToken(latitude, longitude, distance, userId);
-        return ResponseEntity.ok(jobs);
-    }
-
-    @RequestMapping(value = "/getalljobsbylocation", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllJobsByLocation(@RequestParam Double latitude, @RequestParam Double longitude, @RequestParam Double distance) {
-        List<OrderEntity> jobs = jobService.findAllNearestJobs(latitude, longitude, distance);
-
+        List<OrderEntity> jobs = orderService.getAvailableOrders(latitude, longitude, distance, userId);
         return ResponseEntity.ok(jobs);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<?> get(@PathVariable("id") Integer id) {
 
-        Optional<OrderEntity> job = jobService.findById(id);
+        Optional<OrderEntity> job = orderService.findById(id);
         return ResponseEntity.ok(job);
-    }
-
-    @RequestMapping(value = "/getjobsbyaccount", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll(@RequestParam Integer userId) {
-        List<OrderEntity> jobs = jobService.findAllPostedJobs(userId);
-
-
-        return ResponseEntity.ok(jobs);
     }
 
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody OrderEntity job) {
-        jobService.save(job);
+        orderService.save(job);
         return ResponseEntity.ok(job);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody OrderEntity orderEntity) {
 
-        if (jobService.exists(id)) {
-            jobService.update(orderEntity);
+        if (orderService.exists(id)) {
+            orderService.update(orderEntity);
             return ResponseEntity.ok(orderEntity);
         } else {
             ResponseModel responseModel = new ResponseModel();
@@ -111,8 +89,8 @@ public class OrderController {
     @RequestMapping(value = "registerjob/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> registerjob(@PathVariable("id") Integer id, @RequestBody OrderEntity orderEntity) {
 
-        if (jobService.exists(id)) {
-            jobService.update(orderEntity);
+        if (orderService.exists(id)) {
+            orderService.update(orderEntity);
 
             return ResponseEntity.ok(orderEntity);
         } else {
@@ -126,59 +104,42 @@ public class OrderController {
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
 
-        if (!jobService.exists(id)) {
+        if (!orderService.exists(id)) {
             ResponseModel responseModel = new ResponseModel();
-            responseModel.setMessage("You have no jobs found!");
+            responseModel.setMessage("You have no orders found!");
 
             return ResponseEntity.ok(responseModel);
         }else {
-            OrderEntity orderEntity = jobService.findSingleById(id);
-            jobService.delete(id);
+            Optional<OrderEntity> orderEntity = orderService.findById(id);
+            orderService.delete(id);
 
 
             return ResponseEntity.ok(orderEntity);
         }
     }
 
-    @RequestMapping(value = "/get-my-upcoming-work", method = RequestMethod.GET)
-    public ResponseEntity<?> getAppliedJobsByGooogleAccount(@RequestParam Integer userId) {
-        List<OrderEntity> jobs = jobService.findUpcomingWork(userId);
-
-        if (jobs.isEmpty()) {
-            ResponseModel responseModel = new ResponseModel();
-            responseModel.setMessage("You have no jobs found!");
-        }
-
-        return ResponseEntity.ok(jobs);
-    }
-
-    @RequestMapping(value = "/getmydonework", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public ResponseEntity<?> getMyDoneWork(@RequestParam Integer userId) {
-        List<OrderEntity> jobs = jobService.findMyDoneWork(userId);
+        List<OrderEntity> orders = orderService.getMyOrders(userId);
 
-        if (jobs.isEmpty()) {
+        if (orders.isEmpty()) {
             ResponseModel responseModel = new ResponseModel();
-            responseModel.setMessage("You have no jobs found!");
+            responseModel.setMessage("You have no orders!");
         }
 
-        return ResponseEntity.ok(jobs);
+        return ResponseEntity.ok(orders);
     }
 
     @RequestMapping(value = "/get-main-data", method = RequestMethod.GET)
     public ResponseEntity<MainData> getMainData(@RequestParam Integer userId) {
-        List<OrderEntity> applyedJobs = jobService.findUpcomingWork(userId);
-        List<JobApplicationDTO> myCandidates = jobApplicationService.findCandidates(userId);
-
         MainData mainData = new MainData();
-        mainData.setMyUpcomingWorkNumber(applyedJobs.size());
-        mainData.setMyCandidatesNumber(myCandidates.size());
 
         return ResponseEntity.ok(mainData);
     }
 
     @RequestMapping(value = "deleteall", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteaLL() {
-        jobService.deleteAll();
+        orderService.deleteAll();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

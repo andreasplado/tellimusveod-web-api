@@ -14,4 +14,10 @@ public interface IOrderService {
     void deleteAll();
     Optional<OrderEntity> findById(Integer id);
     boolean exists(Integer id);
+
+    void applyToOrder(Integer applyerId);
+
+    List<OrderEntity> getAvailableOrders(Double latitude, Double longitude, Double distance, Integer userId);
+
+    List<OrderEntity> getMyOrders(Integer userId);
 }

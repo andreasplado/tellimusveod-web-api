@@ -54,4 +54,19 @@ public class OrderService implements IOrderService {
         return orderRepository.existsById(id);
     }
 
+    @Override
+    public void applyToOrder(Integer applyerId) {
+
+    }
+
+    @Override
+    public List<OrderEntity> getAvailableOrders(Double latitude, Double longitude, Double distance, Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<OrderEntity> getMyOrders(Integer userId) {
+        return null;
+    }
+
 }

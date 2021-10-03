@@ -1,5 +1,7 @@
 package com.tellimusveod.webapi.controller;
 
+import com.tellimusveod.webapi.dto.NotificationRequestDto;
+import com.tellimusveod.webapi.dto.SubscriptionRequestDto;
 import com.tellimusveod.webapi.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
