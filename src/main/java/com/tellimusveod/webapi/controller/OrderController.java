@@ -3,7 +3,6 @@ package com.tellimusveod.webapi.controller;
 import com.tellimusveod.webapi.entity.OrderEntity;
 import com.tellimusveod.webapi.model.MainData;
 import com.tellimusveod.webapi.model.ResponseModel;
-import com.tellimusveod.webapi.service.JobCategoryService;
 import com.tellimusveod.webapi.service.OrderService;
 import com.tellimusveod.webapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
