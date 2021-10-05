@@ -20,7 +20,7 @@
 #Endpoints
 
 ###Gettin offers by location in a distance
-Gettin jobs by location in a distance. Distance is in METERS! Add your longitude and latitude after '='.
+Gettin offers by location in a distance. Distance is in METERS! Add your longitude and latitude after '='.
 Example with Longitude 152.522067 and latitude 58.698017<br>
 
 ```ggg```
